@@ -53,7 +53,9 @@ courseName = WebDriverWait(driver, 10).until(
 course_info = {}
 
 def extract_course_info(data_title):
-    return driver.find_element(By.XPATH, f"//td[@data-title='{data_title}']").text
+    return [element.text for element in driver.find_elements(By.XPATH, f"//td[@data-title='{data_title}']")]
+
+
 
 course_info['Tee Time'] = extract_course_info('Tee Time')
 course_info['Tee'] = extract_course_info('Tee')
