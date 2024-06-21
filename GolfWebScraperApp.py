@@ -34,17 +34,27 @@ driver.execute_script("arguments[0].classList.add('active');", sundayDatePicker)
 WebDriverWait(driver, 10).until(EC.element_to_be_clickable(sundayDatePicker)) 
 sundayDatePicker.click()
 
+
+
+
 WebDriverWait(driver, 10).until(
         EC.presence_of_all_elements_located((By.CLASS_NAME, 'btnBookNow'))
 )
 WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.CLASS_NAME, 'btnBookNow')))
 courses = driver.find_elements(By.CLASS_NAME, 'btnBookNow')
 
-coursetest = courses[1]
-
+coursetest = courses[0]
 coursetest.click()
 
+#WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.CLASS_NAME, '__backCourseList')))
+#backButton = driver.find_element(By.CLASS_NAME, '__backCourseList')
 
-#for course in courses:
- #   WebDriverWait(driver, 10).until(EC.element_to_be_clickable(course))
-  #  course.click()
+#WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.CLASS_NAME, "btnBackList")))
+#backButton = driver.find_element(By.CLASS_NAME, "btnBackList")
+#backButton.click()
+
+backbutton = driver.find_element(By.XPATH, "//a[@class='btnBackList _backCourseList']")
+driver.execute_script("arguments[0].click();", backbutton)
+
+coursetest = courses[1]
+coursetest.click()
