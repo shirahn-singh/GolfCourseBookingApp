@@ -43,14 +43,30 @@ WebDriverWait(driver, 10).until(
 WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.CLASS_NAME, 'btnBookNow')))
 courses = driver.find_elements(By.CLASS_NAME, 'btnBookNow')
 
-coursetest = courses[0]
-coursetest.click()
-
-backButton = WebDriverWait(driver, 10).until(
-    EC.visibility_of_element_located((By.XPATH, "//div[contains(@class, 'backSec sections mobile pt-3')]//a[contains(@class, 'btnBackList')]"))
-)
-driver.execute_script("arguments[0].scrollIntoView(true);", backButton)
-driver.execute_script("arguments[0].click();", backButton)
-
 coursetest = courses[1]
 coursetest.click()
+
+courseName = WebDriverWait(driver, 10).until(
+    EC.visibility_of_element_located((By.XPATH, "//h4[contains(@class, '__courseNameTime')]/b"))
+).text
+
+course_info = {}
+
+def extract_course_info(data_title):
+    return driver.find_element(By.XPATH, f"//td[@data-title='{data_title}']").text
+
+course_info['Tee Time'] = extract_course_info('Tee Time')
+course_info['Tee'] = extract_course_info('Tee')
+course_info['Holes'] = extract_course_info('Holes')
+course_info['Rate Per Player'] = extract_course_info('Rate Per Player')
+course_info['Slots'] = extract_course_info('Slots')
+
+print(courseName)
+for key, value in course_info.items():
+    print(f"{key}: {value}")
+
+#backButton = WebDriverWait(driver, 10).until(
+#   EC.visibility_of_element_located((By.XPATH, "//div[contains(@class, 'backSec sections mobile pt-3')]//a[contains(@class, 'btnBackList')]"))
+#)
+#backButton.click()
+
