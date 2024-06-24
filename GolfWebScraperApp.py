@@ -38,18 +38,18 @@ datePickerElement = driver.find_element(By.XPATH, xpath)
 datePickerElement.click()
 
 WebDriverWait(driver, 10).until(
-        EC.presence_of_all_elements_located((By.CLASS_NAME, 'btnBookNow'))
+        EC.presence_of_all_elements_located((By.CLASS_NAME, 'btnBookNw '))
 )
 
-WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.CLASS_NAME, 'btnBookNow')))
-courses = driver.find_elements(By.CLASS_NAME, 'btnBookNow')
+WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.CLASS_NAME, 'btnBookNw ')))
+courses = driver.find_elements(By.CLASS_NAME, 'btnBookNw ')
 
 allCourseInfo = []
 
 for course in courses:
     course.click()
     courseName = WebDriverWait(driver, 10).until(
-        EC.visibility_of_element_located((By.XPATH, "//h4[contains(@class, '__courseNameTime')]/b"))
+        EC.visibility_of_element_located((By.ID, "__teeTimeClub"))
     ).text
 
     courseInfo = {}
@@ -69,7 +69,7 @@ for course in courses:
     allCourseInfo.append(courseInfo)
 
     backButton = WebDriverWait(driver, 10).until(
-        EC.visibility_of_element_located((By.XPATH, "//div[contains(@class, 'backSec sections mobile pt-3')]//a[contains(@class, 'btnBackList')]"))
+        EC.visibility_of_element_located((By.XPATH, "//a[contains(@class, 'btnBackList')]"))
     )
     backButton.click()
 
